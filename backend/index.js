@@ -1,8 +1,19 @@
 require("dotenv").config()
 const express = require("express")
+const cors = require("cors");
 require("./mongooseConnection")
 
 const app = express()
+// Enable CORS for all routes
+app.use(cors());
+
+// To configure CORS with specific settings:
+app.use(cors({
+    origin: '*', // Allow all origins or specify the allowed origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Specify allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization']  // Specify allowed headers
+}));
+
 app.use(express.json())
 
 //store files image and pdf
