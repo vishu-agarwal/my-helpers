@@ -106,7 +106,7 @@ const ViewClientProfile = () => {
                 state: viewUserProfile?.address?.state,
                 pincode: viewUserProfile?.address?.pincode,
                 about: viewUserProfile?.about,
-                avatar: "http://localhost:3001/" + viewUserProfile?.avatar
+                avatar: "https://my-helpers-backend.vercel.app/" + viewUserProfile?.avatar
             })
         }
     }, [viewUserProfile])

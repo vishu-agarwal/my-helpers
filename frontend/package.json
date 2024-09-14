@@ -67,6 +67,5 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "dist/cjs",
   "author": "",
-  "license": "ISC",
-  "proxy": "http://localhost:3001"
+  "license": "ISC"
 }

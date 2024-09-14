@@ -100,7 +100,7 @@ const Header = (props) => {
     }, [isAuth])
 
     useEffect(() => {
-        setAvatar(userProfile?.avatar ? "http://localhost:3001/" + userProfile?.avatar : `${require("../allImages/profile.gif")}`)
+        setAvatar(userProfile?.avatar ? "https://my-helpers-backend.vercel.app/" + userProfile?.avatar : `${require("../allImages/profile.gif")}`)
     }, [userProfile])
 
     const handleOpenNavMenu = (event) => {

@@ -5,7 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import {  Grid } from "@mui/material";
+import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
 import Rating from '@mui/material/Rating';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
@@ -144,7 +144,7 @@ const CardJS = (props) => {
                                 component="img"
                                 height={"80%"}
                                 sx={{ width: "100%" }}
-                                image={`http://localhost:3001/${props.values.avatar}`}
+                                image={`https://my-helpers-backend.vercel.app/${props.values.avatar}`}
                                 alt="Profile Image"
                             />
                         </Grid>

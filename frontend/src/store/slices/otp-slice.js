@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { instance } from '../axiosHeader';
 
 const initialState = {
     otpUser: '',
@@ -13,7 +13,7 @@ export const otpThunk = createAsyncThunk("otpLogin/otpThunk", async (arg) => {
         const data = {
             email: arg.email,
         };
-        const otpRes = await axios.post(`/myhelpers/otp/${arg.role}`,data)
+        const otpRes = await instance.post(`/myhelpers/otp/${arg.role}`,data)
         return otpRes
     }
     catch (error) {

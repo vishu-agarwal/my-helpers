@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { instance } from '../axiosHeader';
 
 const initialState = {
     hireRequestData: [],
@@ -26,11 +26,15 @@ export const sendHireRequestThunk = createAsyncThunk("hireRequest/sendHireReques
                     description: arg.values.description
                 }
             ]
-        const workDataRes = await axios.post(`/myhelpers/sendHelperRequest/${arg.rid}`, data, {
+        const workDataRes = await instance.post(
+          `/myhelpers/sendHelperRequest/${arg.rid}`,
+          data,
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
-        })
+          }
+        );
         return workDataRes
     }
     catch (error) {
@@ -40,11 +44,14 @@ export const sendHireRequestThunk = createAsyncThunk("hireRequest/sendHireReques
 //fetch workDetails thunk
 export const fetchHelperRequestsThunk = createAsyncThunk("hireRequest/fetchHelperRequestsThunk", async (arg) => {
     try {
-        const hireRequest = await axios.get(`/myhelpers/fetchHireRequest/${arg}`, {
+        const hireRequest = await instance.get(
+          `/myhelpers/fetchHireRequest/${arg}`,
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
-        })
+          }
+        );
         return hireRequest
     } catch (error) {
         throw new Error(error.response.data)
@@ -52,11 +59,14 @@ export const fetchHelperRequestsThunk = createAsyncThunk("hireRequest/fetchHelpe
 })
 export const fetchSingleHireRequestThunk = createAsyncThunk("hireRequest/fetchSingleHireRequestThunk", async (arg) => {
     try {
-        const fetchHelperRes = await axios.get(`/myhelpers/fetchSingleHireRequest/${arg.rid}/${arg.user_id}`, {
+        const fetchHelperRes = await instance.get(
+          `/myhelpers/fetchSingleHireRequest/${arg.rid}/${arg.user_id}`,
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
-        })
+          }
+        );
         return fetchHelperRes
     } catch (error) {
         throw new Error(error.response.data)
@@ -76,11 +86,15 @@ export const updateHireRequestThunk = createAsyncThunk("hireRequest/updateHireRe
             to_time: arg.values.toTime,
             description: arg.values.description
         }
-        const updateRes = await axios.put(`/myhelpers/updateHireRequest/${arg.rid}`, data, {
+        const updateRes = await instance.put(
+          `/myhelpers/updateHireRequest/${arg.rid}`,
+          data,
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
-        })
+          }
+        );
         return updateRes
     } catch (error) {
         throw new Error(error.response.data)
@@ -89,11 +103,15 @@ export const updateHireRequestThunk = createAsyncThunk("hireRequest/updateHireRe
 //accept request of client by helper
 export const acceptRequestThunk = createAsyncThunk("hireRequest/acceptRequestThunk", async (arg) => {
     try {
-        const response = await axios.patch(`/myhelpers/acceptRequest/${arg.rid}/${arg.user_id}`, { },{
+        const response = await instance.patch(
+          `/myhelpers/acceptRequest/${arg.rid}/${arg.user_id}`,
+          {},
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
-        })
+          }
+        );
         return response
     } catch (error) {
         throw new Error(error.response.data)
@@ -102,11 +120,15 @@ export const acceptRequestThunk = createAsyncThunk("hireRequest/acceptRequestThu
 //reject request of client by helper
 export const rejectRequestThunk = createAsyncThunk("hireRequest/rejectRequestThunk", async (arg) => {
     try {
-        const response = await axios.patch(`/myhelpers/rejectRequest/${arg.rid}/${arg.user_id}`,{ }, {
+        const response = await instance.patch(
+          `/myhelpers/rejectRequest/${arg.rid}/${arg.user_id}`,
+          {},
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
-            }
-        })
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
+            },
+          }
+        );
         return response
     } catch (error) {
         throw new Error(error.response.data)
@@ -115,11 +137,15 @@ export const rejectRequestThunk = createAsyncThunk("hireRequest/rejectRequestThu
 //accept request of client by helper
 export const deleteRequestThunk = createAsyncThunk("hireRequest/deleteRequestThunk", async (arg) => {
     try {
-        const response = await axios.patch(`/myhelpers/deleteRequest/${arg.rid}/${arg.user_id}`,{ }, {
+        const response = await instance.patch(
+          `/myhelpers/deleteRequest/${arg.rid}/${arg.user_id}`,
+          {},
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
-        })
+          }
+        );
         return response
     } catch (error) {
         throw new Error(error.response.data)

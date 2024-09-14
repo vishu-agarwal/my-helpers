@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { instance } from '../axiosHeader'
 
 const initialState = {
     userProfile: {},
@@ -12,7 +12,7 @@ const initialState = {
 
 export const avatarThunk = createAsyncThunk("userProfile/avatarThunk", async (arg) => {
     try {
-        const res = await axios.post(`/myhelper/upldAvatar/${arg.rid}`, arg.formdata, {
+        const res = await instance.post(`/myhelper/upldAvatar/${arg.rid}`, arg.formdata, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("logToken")
             },
@@ -24,7 +24,7 @@ export const avatarThunk = createAsyncThunk("userProfile/avatarThunk", async (ar
 })
 export const aadharThunk = createAsyncThunk("userProfile/aadharThunk", async (arg) => {
     try {
-        const res = await axios.post(`/myhelper/upldAadhar/${arg.rid}`, arg.formdata, {
+        const res = await instance.post(`/myhelper/upldAadhar/${arg.rid}`, arg.formdata, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
@@ -57,7 +57,7 @@ export const createProfileThunk = createAsyncThunk("userProfile/createProfileThu
             alternate_mobile_number: arg.values.altmbl,
             about: arg.values.about
         };
-        const userRes = await axios.post(`/myhelpers/crtProfile/${arg.rid}`, data, {
+        const userRes = await instance.post(`/myhelpers/crtProfile/${arg.rid}`, data, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
@@ -72,7 +72,7 @@ export const createProfileThunk = createAsyncThunk("userProfile/createProfileThu
 //fetch logged in user data
 export const fetchUserProfileThunk = createAsyncThunk("userProfile/fetchProfileThunk", async (arg) => {
     try {
-        const fetchUser = await axios.get(`/myhelpers/userProfile/fetch/${arg}`,
+        const fetchUser = await instance.get(`/myhelpers/userProfile/fetch/${arg}`,
             {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("logToken")

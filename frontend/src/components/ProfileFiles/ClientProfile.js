@@ -6,7 +6,10 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from '@mui/material/IconButton';
-import { Card, Grid, InputLabel, Typography } from '@mui/material';
+import Card from '@mui/material/Card';
+import Grid from '@mui/material/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -315,7 +318,7 @@ const ClientProfile = () => {
         })
     }
     const onAadharView = () => {
-        window.open(`http://localhost:3001/${aadhar.dispFile}`)
+        window.open(`https://my-helpers-backend.vercel.app/${aadhar.dispFile}`)
     }
     const [onClick, setOnClick] = useState(false)
     const hiddenFileInput = React.useRef(null);

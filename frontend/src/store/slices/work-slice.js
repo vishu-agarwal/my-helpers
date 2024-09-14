@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { instance } from '../axiosHeader';
 
 const initialState = {
     workData: [],
@@ -20,7 +20,7 @@ export const workProfileThunk = createAsyncThunk("workProfile/workProfileThunk",
             work_details: arg.fields,
             languages: lang
         };
-        const workDataRes = await axios.post(`/myhelpers/createWorkProfile/${arg.rid}`, data, {
+        const workDataRes = await instance.post(`/myhelpers/createWorkProfile/${arg.rid}`, data, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
@@ -34,7 +34,7 @@ export const workProfileThunk = createAsyncThunk("workProfile/workProfileThunk",
 //fetch workDetails thunk
 export const fetchWorkThunk = createAsyncThunk("workProfile/fetchWorkThunk", async (arg) => {
     try {
-        const fetchRes = await axios.get(`/myhelpers/fetchWorkDetail/${arg}`, {
+        const fetchRes = await instance.get(`/myhelpers/fetchWorkDetail/${arg}`, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
@@ -56,11 +56,15 @@ export const updateWorkThunk = createAsyncThunk("workProfile/updateWorkThunk", a
             work_details: arg.fields,
             languages: lang
         };
-        const updateRes = await axios.put(`/myhelpers/updateWorkDetail/${arg.rid}`, data, {
+        const updateRes = await instance.put(
+          `/myhelpers/updateWorkDetail/${arg.rid}`,
+          data,
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
-        })
+          }
+        );
         return updateRes
     } catch (error) {
         throw new Error(error.response.data)

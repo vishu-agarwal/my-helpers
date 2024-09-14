@@ -174,7 +174,7 @@ const ViewProfileDetail = () => {
                     study: workData?.education,
                     otherStudy: workData?.other_education,
                     language: list,
-                    avatar: "http://localhost:3001/" + viewUserProfile?.avatar
+                    avatar: "https://my-helpers-backend.vercel.app/" + viewUserProfile?.avatar
                 })
                 let workDetails = workData?.work_details?.filter((data) => data)
                 setFields(workDetails)

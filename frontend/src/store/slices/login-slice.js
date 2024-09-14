@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { instance } from '../axiosHeader'
 
 const initialState = {
     logUser: [],
@@ -25,7 +25,10 @@ export const loginThunk = createAsyncThunk("userLogin/loginThunk", async (arg) =
         const data = {
             email: arg.email
         };
-        const loginRes = await axios.post(`/myhelpers/register/${arg.role}`, data)
+        const loginRes = await instance.post(
+          `/myhelpers/register/${arg.role}`,
+          data
+        );
         let role = '';
         if (loginRes?.data?.removeOtp?.r_id?.charAt(0) === 'C') {
             role = 'Client'

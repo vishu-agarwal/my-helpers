@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { instance } from '../axiosHeader'
+
 const initialState = {
     displayData: [],
     viewUserProfile: {},
@@ -14,11 +15,11 @@ const initialState = {
 //fetch all data of helpers
 export const fetchAllThunk = createAsyncThunk("displayAll/fetchAllThunk", async (arg) => {
     try {
-        const fetchRes = await axios.get(`/myhelpers/fetchAllData/Client`, {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken")
-            },
-        })
+        const fetchRes = await instance.get(`/myhelpers/fetchAllData/Client`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("logToken"),
+          },
+        });
         return fetchRes
     } catch (error) {
         throw new Error(error.response.data)
@@ -27,12 +28,14 @@ export const fetchAllThunk = createAsyncThunk("displayAll/fetchAllThunk", async 
 //fetch view details of user 
 export const fetchViewUserDataThunk = createAsyncThunk("displayAll/fetchViewUserDataThunk", async (arg) => {
     try {
-        const fetchUser = await axios.get(`/myhelpers/userProfile/fetch/${arg}`,
-            {
-                headers: {
-                    Authorization: "Bearer " + localStorage.getItem("logToken"),
-                },
-            })
+        const fetchUser = await instance.get(
+          `/myhelpers/userProfile/fetch/${arg}`,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
+            },
+          }
+        );
         return fetchUser
     } catch (error) {
         throw new Error(error.response.data)
@@ -41,11 +44,11 @@ export const fetchViewUserDataThunk = createAsyncThunk("displayAll/fetchViewUser
 //fetch save user data
 export const fetchSaveUserThunk = createAsyncThunk("displayAll/fetchSaveUserThunk", async (arg) => {
     try {
-        const fetchRes = await axios.get(`/myhelpers/fetchSaveUser/${arg}`, {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
-            },
-        })
+        const fetchRes = await instance.get(`/myhelpers/fetchSaveUser/${arg}`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("logToken"),
+          },
+        });
         return fetchRes
     } catch (error) {
         throw new Error(error.response.data)
@@ -53,11 +56,14 @@ export const fetchSaveUserThunk = createAsyncThunk("displayAll/fetchSaveUserThun
 })
 export const searchThunk = createAsyncThunk("displayAll/searchThunk", async (arg) => {
     try {
-        const fetchRes = await axios.get(`/myhelpers/search?field=${arg.workSearch}&searchValue=${arg.filterWork}`, {
+        const fetchRes = await instance.get(
+          `/myhelpers/search?field=${arg.workSearch}&searchValue=${arg.filterWork}`,
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
-        })
+          }
+        );
         return fetchRes
     } catch (error) {
         throw new Error(error.response.data)
@@ -65,11 +71,14 @@ export const searchThunk = createAsyncThunk("displayAll/searchThunk", async (arg
 })
 export const sortThunk = createAsyncThunk("displayAll/sortThunk", async (arg) => {
     try {
-        const fetchRes = await axios.get(`/myhelpers/sort?field=${arg.field}&sortValue=${arg.sort}`, {
+        const fetchRes = await instance.get(
+          `/myhelpers/sort?field=${arg.field}&sortValue=${arg.sort}`,
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
-        })
+          }
+        );
         return fetchRes
     } catch (error) {
         throw new Error(error.response.data)
@@ -80,12 +89,15 @@ export const saveThunk = createAsyncThunk("displayAll/saveThunk", async (arg) =>
         const data = {
             user_id: arg.user_id
         }
-        const fetchRes = await axios.post(`/myhelpers/saveUser/${arg.rid}`, data, {
+        const fetchRes = await instance.post(
+          `/myhelpers/saveUser/${arg.rid}`,
+          data,
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
-            }
-        }
-        )
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
+            },
+          }
+        );
         return fetchRes
     }
     catch (error) {
@@ -98,11 +110,15 @@ export const starThunk = createAsyncThunk("displayAll/starThunk", async (arg) =>
             user_id: arg.user_id,
             rate: arg.rate
         }
-        const res = await axios.put(`/myhelper/updateStar/${arg.rid}`, data, {
+        const res = await instance.put(
+          `/myhelper/updateStar/${arg.rid}`,
+          data,
+          {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("logToken"),
+              Authorization: "Bearer " + localStorage.getItem("logToken"),
             },
-        })
+          }
+        );
         return res;
     }
     catch (error) {
