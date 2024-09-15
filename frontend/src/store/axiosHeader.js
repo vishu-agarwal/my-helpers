@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // Set config defaults when creating the instance
 export const instance = axios.create({
-  baseURL: "https://my-helpers-backend.vercel.app/",
+  baseURL: process.env.REACT_APP_BACKEND_URL,
   headers: {
     Authorization: "Bearer " + localStorage.getItem("logToken"),
   },

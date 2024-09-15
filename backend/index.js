@@ -10,7 +10,7 @@ app.use(cors());
 // To configure CORS with specific settings:
 app.use(
   cors({
-    origin: "*", // Allow all origins or specify the allowed origins
+    origin: process.env.HOST, // Allow all origins or specify the allowed origins
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Specify allowed methods
     allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
   })
