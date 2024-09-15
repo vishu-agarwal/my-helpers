@@ -1,7 +1,8 @@
+const mongoose = require("mongoose");
 
-const mongoose = require("mongoose")
+const conUrl = process.env.MONGO_URL;
+const dbname = "MyHelpers";
 
-const conUrl = process.env.MongoURL
-const dbname = 'MyHelpers'
-
-mongoose.connect(`${conUrl}/${dbname}`).then(() => { console.log("connected with mongodb"); })
+mongoose.connect(`${conUrl}/${dbname}`).then(() => {
+  console.log("connected with mongodb");
+});

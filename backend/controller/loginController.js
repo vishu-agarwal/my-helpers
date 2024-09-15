@@ -39,13 +39,13 @@ async function otpFunction(email) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "realadtest@gmail.com", // generated ethereal user
-        pass: "smartdevs@123", // generated ethereal password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
     console.log("transporter----", transporter);
     let info = await transporter.sendMail({
-      from: "realadtest@gmail.com", // sender address
+      from: process.env.EMAIL_USER, // sender address
       to: receiverMail, // list of receivers
       subject: "Otp SMS My Helpers ✔", // Subject line
       text: mailText, // plain text body
